@@ -1,6 +1,10 @@
 # DNA Toolset/Code testing file
 from DNAToolkit import *
+import random
 
-rndDNAStr = "ATtttttTCGT"
+# random DNA sequence
+randDNAStr = ''.join([random.choice(Nucleotides)
+                        for nuc in range(20)])
 
-print(validateSeq(rndDNAStr))
+DNAStr = validateSeq(randDNAStr)
+print(countNucFrequency(DNAStr))

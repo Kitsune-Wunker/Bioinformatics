@@ -1,7 +1,6 @@
 # DNA Toolkit file
 import collections
-
-Nucleotides = ["A", "C", "G", "T"]
+from sequences import *
 
 # Check a given sequence to validate it is a DNA SyntaxWarning
 def validateSeq(dna_seq):
@@ -18,3 +17,10 @@ def countNucFrequency(seq):
         tmpFreqDict[nuc] += 1
     return tmpFreqDict
 #    return dict(collections.Counter(seq))
+
+# Transcription (we love uracil)
+def transcription(seq):
+    return seq.replace("T", "U")
+
+def reverse_complement(seq):
+    return ''.join([DNA_ReverseComplement[nuc] for nuc in seq])[::-1]

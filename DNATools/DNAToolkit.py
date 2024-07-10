@@ -1,5 +1,6 @@
 # DNA Toolkit file
 import collections
+from collections import Counter
 from sequences import *
 
 # Check a given sequence to validate it is a DNA SyntaxWarning
@@ -38,3 +39,19 @@ def gc_content_subset(seq, k=20):
         subset = seq[i:i + k]
         res.append(gc_content(subset))
     return res
+
+# translate DNA to amino acids
+def translate_seq(seq, init_pos=0):
+    return [DNA_Codons[seq[pos:pos + 3]] for pos in range(init_pos, len(seq) - 2, 3)]
+
+def codon_usage(seq, aminoacid):
+    tmpList = []
+    for i in range(0, len(seq) - 2, 3):
+        if DNA_Codons[seq[i:i + 3]] == aminoacid:
+                tmpList.append(seq[i:i + 3])
+
+    freqDict = dict(Counter(tmpList))
+    totalWight = sum(freqDict.values())
+    for seq in freqDict:
+        freqDict[seq] = round(freqDict[seq] / totalWight, 2)
+    return freqDict

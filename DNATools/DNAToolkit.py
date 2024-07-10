@@ -20,7 +20,21 @@ def countNucFrequency(seq):
 
 # Transcription (we love uracil)
 def transcription(seq):
+    """Replaces Thymine with Uracil"""
     return seq.replace("T", "U")
 
+# reverse complement
 def reverse_complement(seq):
     return ''.join([DNA_ReverseComplement[nuc] for nuc in seq])[::-1]
+
+# GC content
+def gc_content(seq):
+    return round((seq.count('C') + seq.count('G')) / len(seq) * 100)
+
+# GC subset content of a sub sequence length of k
+def gc_content_subset(seq, k=20):
+    res = []
+    for i in range(0, len(seq) - k + 1, k):
+        subset = seq[i:i + k]
+        res.append(gc_content(subset))
+    return res
